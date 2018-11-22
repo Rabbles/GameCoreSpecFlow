@@ -56,9 +56,36 @@ namespace GameCore.Specs
         [Given(@"I have the following attributes")]
         public void GivenIHaveTheFollowingAttributes(Table table)
         {
-            var attributes = table.CreateInstance<PlayerAttributes>();
+            //var attributes = table.CreateInstance<PlayerAttributes>();
+            dynamic attributes = table.CreateDynamicInstance();
             _player.Race = attributes.Race;
             _player.DamageResistance = attributes.Resistance;
+        }
+
+        //Automatic enum conversion
+        [Given(@"my class is set to (.*)")]
+        public void GivenMyClassIsSetToHealer(CharacterClass character)
+        {
+            _player.CharacterClass = character;
+        }
+
+        [When(@"cast a healing spell")]
+        public void WhenCastAHealingSpell()
+        {
+            _player.CastHealingSpell();
+        }
+
+
+        [Given(@"I have the following magical items")]
+        public void GivenIHaveTheFollowingMagicalItems(Table table)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"My total magical power should be (.*)")]
+        public void ThenMyTotalMagicalPowerShouldBe(int p0)
+        {
+            ScenarioContext.Current.Pending();
         }
 
 
