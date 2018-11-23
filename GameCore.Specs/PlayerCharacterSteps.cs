@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TechTalk.SpecFlow;
 using Xunit;
 using System.Linq;
@@ -79,13 +80,42 @@ namespace GameCore.Specs
         [Given(@"I have the following magical items")]
         public void GivenIHaveTheFollowingMagicalItems(Table table)
         {
-            ScenarioContext.Current.Pending();
+           //weakly typed example
+            //foreach (var row in table.Rows)
+            //{
+            //    var name = row["item"];
+            //    var power = row["power"];
+            //    var value = row["value"];
+
+            //    _player.MagicalItems.Add(new MagicalItem
+            //    {
+            //        Name = name,
+            //        Power = int.Parse(power),
+            //    });
+            //}
+
+            //strongly typed example
+            //IEnumerable<MagicalItem> items = table.CreateSet<MagicalItem>();
+            //_player.MagicalItems.AddRange(items);
+
+            //dynamic example
+            IEnumerable<dynamic> items = table.CreateDynamicSet();
+
+            foreach (var item in items)
+            {
+                _player.MagicalItems.Add(new MagicalItem
+                {
+                    Name = item.name,
+                    Value = item.value,
+                    Power = item.power
+                });
+            }
         }
 
         [Then(@"My total magical power should be (.*)")]
-        public void ThenMyTotalMagicalPowerShouldBe(int p0)
+        public void ThenMyTotalMagicalPowerShouldBe(int expectedPower)
         {
-            ScenarioContext.Current.Pending();
+           Assert.Equal(expectedPower, _player.MagicalPower);
         }
 
 
