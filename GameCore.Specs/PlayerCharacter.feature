@@ -55,3 +55,11 @@ Scenario: Reading a Restore Health scroll when over-tired has no effect
 	When I take 40 damage
 		And I read a Restore Health scroll
 	Then My health should now be 60
+
+Scenario: Weapons are worth money
+	Given I have the following weapons
+	| name  | value |
+	| Sword | 50    |
+	| Pick  | 40    |
+	| Knife | 10    |
+	Then My weapons will be worth 100
