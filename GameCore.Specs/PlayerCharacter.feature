@@ -50,3 +50,8 @@ Scenario: Total magical power
 	| Gloves | 100   | 400   |
 	Then My total magical power should be 700
 
+Scenario: Reading a Restore Health scroll when over-tired has no effect
+	Given I last slept 3 days ago
+	When I take 40 damage
+		And I read a Restore Health scroll
+	Then My health should now be 60

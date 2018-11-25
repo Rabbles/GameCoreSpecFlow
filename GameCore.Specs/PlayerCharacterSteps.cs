@@ -25,22 +25,17 @@ namespace GameCore.Specs
             _player.Hit(damage);
         }
 
-
         [Then(@"My health should now be (.*)")]
         public void ThenMyHealthShouldNowBe(int expectedHealth)
         {
             Assert.Equal(expectedHealth, _player.Health);
         }
 
-
-
-
         [Then(@"I should be dead")]
         public void ThenIShouldBeDead()
         {
             Assert.True(_player.IsDead);
         }
-
 
         [Given(@"I have a damage resistance of (.*)")]
         public void GivenIHaveADamageResistanceOf(int damageResistance)
@@ -75,7 +70,6 @@ namespace GameCore.Specs
         {
             _player.CastHealingSpell();
         }
-
 
         [Given(@"I have the following magical items")]
         public void GivenIHaveTheFollowingMagicalItems(Table table)
@@ -118,6 +112,18 @@ namespace GameCore.Specs
            Assert.Equal(expectedPower, _player.MagicalPower);
         }
 
+        //Note the
+        [Given(@"I last slept (.* days ago)")]
+        public void GivenILastSleptDaysAgo(DateTime lastSlept)
+        {
+            _player.LastTimeSlept = lastSlept;
+        }
+
+        [When(@"I read a Restore Health scroll")]
+        public void WhenIReadARestoreHealthScroll()
+        {
+            _player.ReadHealthScroll();
+        }
 
     }
 }
